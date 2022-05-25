@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-namespace Jackoo.Utils.Manager
+namespace Jackoo.Utils.FileUtility
 {
     // 使用泛型存檔
     public static class FileManager<T>
