@@ -31,11 +31,6 @@ namespace Jackoo.Utils
 
         #endregion
 
-        // public static Vector3 operator *(Vector3 v1, Vector3 v2)
-        // {
-        //     return Vector3.Scale(v1, v2);
-        // }
-
         public static Vector3 Middle(this Vector3 origin, Vector3 target)
         {
             return Vector3.Lerp(origin, target, .5f);
