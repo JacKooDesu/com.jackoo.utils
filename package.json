@@ -1,0 +1,14 @@
+{
+	"name": "com.jackoo.utils",
+	"displayName": "Jackoo Unity Dev Utils",
+	"version": "1.0.0",
+	"unity": "2019.4",
+	"author": "JAHU",
+	"description": "Unity develop utilities",
+	"dependencies": {
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/JacKooDesu/com.jackoo.utils.git"
+	}
+}
