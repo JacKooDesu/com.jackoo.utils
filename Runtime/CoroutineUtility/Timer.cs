@@ -8,11 +8,17 @@ namespace Jackoo.Utils.CoroutineUtility
     {
         static int globalId = 0;
         int id;
+        float time;
+        float current = 0;
         public string ID
         {
             get => $"timer-{id}";
         }
         bool hasRun = false;
+        public bool HasRun
+        {
+            get => hasRun;
+        }
 
         System.Action begin = () => { };
         System.Action<float> update = (f) => { };
@@ -20,6 +26,7 @@ namespace Jackoo.Utils.CoroutineUtility
 
         public Timer(float time, System.Action complete, bool autoRun = true)
         {
+            this.time = time;
             id = globalId;
             globalId++;
 
@@ -31,6 +38,7 @@ namespace Jackoo.Utils.CoroutineUtility
 
         public Timer(float time, System.Action begin, System.Action<float> update, System.Action complete, bool autoRun = true)
         {
+            this.time = time;
             id = globalId;
             globalId++;
 
@@ -54,17 +62,36 @@ namespace Jackoo.Utils.CoroutineUtility
 
             while (t < time)
             {
-                update.Invoke(t);
+                if (update != null)
+                    update.Invoke(t);
                 t += Time.deltaTime;
+                current = t;
                 yield return null;
             }
 
             complete.Invoke();
         }
 
-        public void Stop()
+        public void Start()
         {
+            Manager.Singleton.Add(Run(time), $"timer-{id}");
+        }
+
+        public void Stop(bool forceComplete = false)
+        {
+            if (!hasRun)
+                return;
+
+            if (forceComplete)
+                complete.Invoke();
             Manager.Singleton.Stop($"timer-{id}");
+            hasRun = false;
+        }
+
+        // WIP
+        public void Pause()
+        {
+
         }
     }
 }
